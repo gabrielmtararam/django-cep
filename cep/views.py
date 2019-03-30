@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 import json
-import urllib2
+from urllib.request import urlopen
 import re
 
 
@@ -13,6 +13,6 @@ def addressGet(request, zipcode):
     # Assim não precisamos nos preocupar de como vai vir o cep.
     zipcode = re.sub('[^\d]+', '', zipcode)
     url = "http://viacep.com.br/ws/%s/json/" % zipcode
-    page = urllib2.urlopen(url)
+    page = urlopen(url)
     data = json.loads(page.read())
     return HttpResponse('{"street":"%s","district":"%s","city":"%s","state":"%s"}' % (data["logradouro"], data["bairro"], data["localidade"], data["uf"]))
