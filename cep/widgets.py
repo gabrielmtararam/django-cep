@@ -8,7 +8,7 @@ class CEPInput(TextInput):
         self.address = kwargs.pop('address')
         super(CEPInput, self).__init__(*args, **kwargs)
 
-    def render(self, name, value, attrs):
+    def render(self, name, value, attrs, renderer=None):
         # define input class based on user definition of attrs. rstrip takes spaces in the end of the string.
         self.attrs['class'] = ('zip-field %s' % self.attrs.get('class', '')).rstrip()
         output = super(CEPInput, self).render(name, value, attrs)
